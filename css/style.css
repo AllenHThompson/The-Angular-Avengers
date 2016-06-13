@@ -1,0 +1,10 @@
+#results{
+  /*position: absolute;*/
+  height: 100%;
+  width: 25%;
+  overflow: auto;
+
+  top: 0;
+  left: 0;
+
+}
