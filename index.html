@@ -10,12 +10,19 @@
     <script src="scripts/script.js"></script>
   </head>
   <body ng-app="app" ng-controller="JobSearch">
-    <div id="results" ng-repeat="job in resultList">
-      <p>Job Title: {{job.MatchedObjectDescriptor.PositionTitle}}</p>
-      <p >Location: {{job.SearchResult.SearchResultItems.MatchedObjectDescriptor.PositionLocation}}</p>
-      <hr>
+    <div id="results">
+      <div ng-repeat="job in resultList">
+        <p>Job Title: {{job.MatchedObjectDescriptor.PositionTitle}}</p>
+        <p >Location: {{job.MatchedObjectDescriptor.PositionLocation[0].Latitude}}, {{job.MatchedObjectDescriptor.PositionLocation[0].Longitude}}</p>
+        <hr>
+      </div>
     </div>
-    <button class="btn btn-primart" ng-click="nextPage()">NextPage</button>
 
+    <div class="container">
+      <div id="map">
+      </div>
+    </div>
+    <!-- Google Maps Script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgT-Ah_EjmJL-3DXkgAgacEKeNlVYTQ1A"></script>
   </body>
 </html>
