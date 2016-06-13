@@ -2,9 +2,20 @@
   /*position: absolute;*/
   height: 100%;
   width: 25%;
+  /*float: left;*/
+  position: absolute;
   overflow: auto;
-
+  box-sizing: border-box;
   top: 0;
   left: 0;
+}
+.container{
+  overflow: auto;
+}
+#map{
+  left: 25%;
+  height: 100%;
+  width: 75%;
+  position: absolute;
 
 }
