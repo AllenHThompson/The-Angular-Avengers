@@ -1,3 +1,4 @@
+
 var app = angular.module('app',[]);
 
 function filterForGa(locationList){
@@ -12,10 +13,10 @@ app.controller('JobSearch', function($scope, $http){
           var cityList = job.MatchedObjectDescriptor.PositionLocation;
           var gaLocations = cityList.filter(filterForGa);
           return gaLocations[0];
-     }
+     };
      $scope.openInfoWindow = function(job){
           job.infoWindow.open(map, job.marker);
-     }
+     };
      // job search api call
      $http({
           url: 'https://data.usajobs.gov/api/search',
@@ -39,9 +40,6 @@ app.controller('JobSearch', function($scope, $http){
                     return true;
                } else
                return false;
-
-
-
                /*
                1. store locationList as a variable
                2. filter locationList to only GA locations, store that in variable
@@ -54,7 +52,7 @@ app.controller('JobSearch', function($scope, $http){
           }
           $scope.georgiaResultsList = allResultsList.filter(filterGeorgiaResults);
           // $scope.resultList = data.SearchResult.SearchResultItems;
-          console.log($scope.georgiaResultsList);
+          console.log(JSON.stringify($scope.georgiaResultsList));
 
           var markers = $scope.georgiaResultsList.map(function(job) {
 
@@ -98,11 +96,8 @@ app.controller('JobSearch', function($scope, $http){
                     //REMOVE THE CODE ABOVE
 
                });
-
           });
-
           //<a href = "LINK"></a>
-
      });
 
      // google map api call
