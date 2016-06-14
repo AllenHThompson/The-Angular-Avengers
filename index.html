@@ -14,6 +14,7 @@
       <div ng-repeat="job in resultList">
         <p>Job Title: {{job.MatchedObjectDescriptor.PositionTitle}}</p>
         <p >Location: {{job.MatchedObjectDescriptor.PositionLocation[0].Latitude}}, {{job.MatchedObjectDescriptor.PositionLocation[0].Longitude}}</p>
+        <p >Location: {{job.MatchedObjectDescriptor.PositionLocation[0].CityName}}</p>
         <hr>
       </div>
     </div>
