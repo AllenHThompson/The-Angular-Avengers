@@ -32,7 +32,7 @@ app.controller('JobSearch', function($scope, $http){
 
   //plot marker on the map
   var marker = new google.maps.Marker({
-    // var locationList = job.MatchedObjectDescriptor.PositionLocation;
+    var locationList = job.MatchedObjectDescriptor.PositionLocation;
     locationList.map(function(){
       var lat = locationList.Longitude;
       var lng = locationList.Latitude;
