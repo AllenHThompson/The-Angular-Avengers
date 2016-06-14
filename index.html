@@ -11,16 +11,15 @@
   </head>
   <body ng-app="app" ng-controller="JobSearch">
     <div id="results">
-      <div ng-repeat="job in georgiaResultsList">
+      <div ng-repeat="job in georgiaResultsList" ng-click="openInfoWindow(job)">
         <p>Company Name: {{job.MatchedObjectDescriptor.OrganizationName}}</p>
-        <p >City: {{job.MatchedObjectDescriptor.PositionLocation[0].CityName}}</p>
+        <p >City: {{getGeorgiaLocation(job).CityName}}</p>
+
         <!-- <p >Location: {{job.MatchedObjectDescriptor.PositionLocation[0].Latitude}}, {{job.MatchedObjectDescriptor.PositionLocation[0].Longitude}}</p> -->
         <hr>
       </div>
     </div>
 
-    <div id="floating-panel" ng-click="clearMarker()">
-    </div>
 
     <div class="container">
       <div id="map">

@@ -1,7 +1,21 @@
 var app = angular.module('app',[]);
 
-app.controller('JobSearch', function($scope, $http){
+function filterForGa(locationList){
+     if(locationList.CountrySubDivisionCode === 'Georgia'){
+          return true;
+     } else
+     return false;
+}
 
+app.controller('JobSearch', function($scope, $http){
+     $scope.getGeorgiaLocation = function(job){
+          var cityList = job.MatchedObjectDescriptor.PositionLocation;
+          var gaLocations = cityList.filter(filterForGa);
+          return gaLocations[0];
+     }
+     $scope.openInfoWindow = function(job){
+          job.infoWindow.open(map, job.marker);
+     }
      // job search api call
      $http({
           url: 'https://data.usajobs.gov/api/search',
@@ -19,17 +33,12 @@ app.controller('JobSearch', function($scope, $http){
           var filterGeorgiaResults = function(oneResult) {
                var cityList = oneResult.MatchedObjectDescriptor.PositionLocation;
                var gaLocations = cityList.filter(filterForGa);
-               function filterForGa(locationList){
-                    if(locationList.CountrySubDivisionCode === 'Georgia'){
-                         return true;
-                    } else
-                         return false;
-               }
+
 
                if (gaLocations.length > 0) {
                     return true;
                } else
-                    return false;
+               return false;
 
 
 
@@ -43,27 +52,19 @@ app.controller('JobSearch', function($scope, $http){
           function clearMarker() {
                setMapOnAll(null);
           }
-           $scope.georgiaResultsList = allResultsList.filter(filterGeorgiaResults);
+          $scope.georgiaResultsList = allResultsList.filter(filterGeorgiaResults);
           // $scope.resultList = data.SearchResult.SearchResultItems;
           console.log($scope.georgiaResultsList);
-
-
-
 
           var markers = $scope.georgiaResultsList.map(function(job) {
 
                var locationList = job.MatchedObjectDescriptor.PositionLocation;
 
                //funtiont to fliter the list of jobs to only Georgia
-               function filterForGa(locationList){
-                    if(locationList.CountrySubDivisionCode === 'Georgia'){
-                         return true;
-                    }else
-                         return false;
-               }
-                var locationsInGeorgia = locationList.filter(filterForGa);
 
-                 locationsInGeorgia.map(function(location){
+               var locationsInGeorgia = locationList.filter(filterForGa);
+
+               locationsInGeorgia.map(function(location){
                     var lat = location.Latitude;
                     var lng = location.Longitude;
                     var position = {
@@ -75,17 +76,27 @@ app.controller('JobSearch', function($scope, $http){
                          anchorPoint:new google.maps.Point(0,-8),
                          position: position,
                          map: map,
-
                     });
+                    job.marker = marker
                     var contentString = '<a href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>';
 
 
-                    var infowindow = new google.maps.InfoWindow({
+                    var infoWindow = new google.maps.InfoWindow({
                          content: contentString
                     });
+                    job.infoWindow = infoWindow;
                     marker.addListener('click', function() {
-                         infowindow.open(map, marker);
+                         infoWindow.open(map, marker);
                     });
+                    //REMOVE THE CODE BELOW
+                    // var infowindow = new google.maps.InfoWindow();
+                    // function openInfoWindow(job){
+                    //      var contentString = '<a href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>';
+                    //
+                    //      infoWindow.setContent(contentString);
+                    //
+                    //REMOVE THE CODE ABOVE
+
                });
 
           });
