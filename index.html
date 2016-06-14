@@ -12,7 +12,7 @@
   <body ng-app="app" ng-controller="JobSearch">
     <div id="results">
       <div ng-repeat="job in resultList">
-        <p>Job Title: {{job.MatchedObjectDescriptor.PositionTitle}}</p>
+        <p>Company Name: {{job.MatchedObjectDescriptor.OrganizationName}}</p>
         <p >Location: {{job.MatchedObjectDescriptor.PositionLocation[0].Latitude}}, {{job.MatchedObjectDescriptor.PositionLocation[0].Longitude}}</p>
         <hr>
       </div>
