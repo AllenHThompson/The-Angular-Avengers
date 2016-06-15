@@ -1,4 +1,35 @@
 
+var app = angular.module('app',[]);
+
+//Job Search API service
+app.factory('jobSearchService', function($http){
+  return{
+    getListOfJobs: function(callback){
+      $http({
+        url: 'https://data.usajobs.gov/api/search',
+        params: {
+          JobCategoryCode: 2210,
+          LocationName: 'Atlanta, Georgia'
+        },
+        headers: {
+          //'User-Agent': 'allenhthompson1@gmail.com',
+          'Authorization-Key': 'MfbLK4LehC6CQvAg3U9nr2Y0nBS5IHnMJjPK+KuoWbM='
+        }
+      }).success(callback);
+    } // end getListOfJobs method
+  }; // end return
+});
+
+// Google Map API service
+app.factory('googleMap', function($http){
+  var centerLatLng = {lat: 39.099727, lng: -94.578567};
+  mapOptions = {
+    center: centerLatLng,
+    zoom: 4
+  };
+
+});
+
 var app = angular.module('app',['ngRoute']);
 
 function filterForGa(locationList){
@@ -8,7 +39,17 @@ function filterForGa(locationList){
      return false;
 }
 
+// main controller
+app.controller('MainController', function($scope, jobSearchService, googleMap){
+  jobSearchService.getListOfJobs(function(data){
+    // returns the first 25 results
+    $scope.allResultsList = data.SearchResult.SearchResultItems;
+    console.log($scope.allResultsList);
 
+    // call to the google service plot jobs location on map
+    googleMap.plotData($scope.allResultsList);
+  });
+});
 
 app.config(function($routeProvider) {
      $routeProvider
@@ -25,7 +66,6 @@ app.config(function($routeProvider) {
 app.controller('SaveJobs', function($scope, $http){
 
      $scope.message = 'Test message.';
-
 });
 
 app.controller('JobSearch', function($scope, $http){

@@ -1,5 +1,7 @@
 #results{
   /*position: absolute;*/
+  margin-top: 3.5%;
+  margin-left: 2%;
   height: 100%;
   width: 25%;
   /*float: left;*/
@@ -8,6 +10,10 @@
   box-sizing: border-box;
   top: 0;
   left: 0;
+  white-space: wrap;
+}
+#tabs{
+  width: 25%;
 }
 .container{
   overflow: auto;
@@ -17,5 +23,4 @@
   height: 100%;
   width: 75%;
   position: absolute;
-
 }
