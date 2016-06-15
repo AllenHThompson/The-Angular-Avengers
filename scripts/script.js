@@ -1,5 +1,5 @@
 
-var app = angular.module('app',[]);
+var app = angular.module('app',['ngRoute']);
 
 function filterForGa(locationList){
      if(locationList.CountrySubDivisionCode === 'Georgia'){
@@ -8,7 +8,30 @@ function filterForGa(locationList){
      return false;
 }
 
+
+
+app.config(function($routeProvider) {
+     $routeProvider
+     .when('/', {
+          controller: 'JobSearch',
+          templateUrl: 'main.html'
+     })
+     .when('/savedJobs', {
+          controller: 'SaveJobs',
+          templateUrl: 'savedJobs.html'
+     });
+});
+
+app.controller('SaveJobs', function($scope, $http){
+
+     $scope.message = 'Test message.';
+
+});
+
 app.controller('JobSearch', function($scope, $http){
+
+     // $scope.message = 'Test message.';//this line just checking connectivity
+
      $scope.getGeorgiaLocation = function(job){
           var cityList = job.MatchedObjectDescriptor.PositionLocation;
           var gaLocations = cityList.filter(filterForGa);
@@ -52,7 +75,7 @@ app.controller('JobSearch', function($scope, $http){
           }
           $scope.georgiaResultsList = allResultsList.filter(filterGeorgiaResults);
           // $scope.resultList = data.SearchResult.SearchResultItems;
-          console.log(JSON.stringify($scope.georgiaResultsList));
+          //console.log(JSON.stringify($scope.georgiaResultsList));
 
           var markers = $scope.georgiaResultsList.map(function(job) {
 
@@ -75,7 +98,7 @@ app.controller('JobSearch', function($scope, $http){
                          position: position,
                          map: map,
                     });
-                    job.marker = marker
+                    job.marker = marker;
                     var contentString = '<a href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>';
 
 
