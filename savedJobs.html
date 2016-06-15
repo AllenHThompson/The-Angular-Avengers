@@ -1,10 +1,28 @@
 <div ng-controller="SaveJobs">
+  <ul class="nav nav-tabs" id="tabs2">
+    <li role="presentation"><a href="#/">Results</a></li>
+    <li role="presentation" class="active"><a href="#/savedJobs">Saved Jobs</a></li>
+  </ul>
 
-
-     <h1>Saved Jobs Page</h1>
-
-     <nav style="margin-bottom: 20px;">
-          <a href="#/">CLICK TO TAKE TO NEXT PAGE</a>
-     </nav>
-     <p>{{message}}</p>
+  <div class="savedJobs">
+    <div class="row" ng-repeat="job in savedJobs">
+      <div class="col-md-4">
+        <div>
+          <p>Company Name: {{job.MatchedObjectDescriptor.OrganizationName}}</p>
+          <p>Type: {{job.MatchedObjectDescriptor.PositionOfferingType[0].Name}}</p>
+          <p>Department: {{job.MatchedObjectDescriptor.DepartmentName}}</p>
+          <p>Salary: ${{job.MatchedObjectDescriptor.PositionRemuneration[0].MinimumRange}} - ${{job.MatchedObjectDescriptor.PositionRemuneration[0].MaximumRange}} </p>
+          <p >City: {{job.MatchedObjectDescriptor.PositionLocation[0].CityName}}</p>
+          <button class="btn btn-primary" ng-click="deleteJobBtn($index)">Delete Job</button>
+          <hr>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div>
+          <textarea placeholder="Notes about this job" row="6" cols="60" ng-model="job.notes">{{job.notes}}
+          </textarea>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
