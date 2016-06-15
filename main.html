@@ -1,20 +1,23 @@
 <div ng-controller="JobSearch">
+     <ul class="nav nav-tabs" id="tabs">
+       <li role="presentation" class="active"><a href="#/">Home</a></li>
+       <li role="presentation"><a href="#/savedJobs">Saved Jobs</a></li>
+     </ul>
      <div id="results">
-          <nav style="margin-bottom: 20px;">
-
-               <a href="#/savedJobs" class="btn btn-primary">My Saved Jobs</a>
-          </nav>
           <div ng-repeat="job in allResultsList" ng-click="openInfoWindow(job)">
                <p>Company Name: {{job.MatchedObjectDescriptor.OrganizationName}}</p>
+               <p>Department: {{job.MatchedObjectDescriptor.DepartmentName}}</p>
+               <p>Type: {{job.MatchedObjectDescriptor.PositionOfferingType[0].Name}}</p>
+               <p>Salary: ${{job.MatchedObjectDescriptor.PositionRemuneration[0].MinimumRange}} - ${{job.MatchedObjectDescriptor.PositionRemuneration[0].MaximumRange}} </p>
                <p >City: {{job.MatchedObjectDescriptor.PositionLocation[0].CityName}}</p>
-
-               <!-- <p >Location: {{job.MatchedObjectDescriptor.PositionLocation[0].Latitude}}, {{job.MatchedObjectDescriptor.PositionLocation[0].Longitude}}</p> -->
+               <button class="btn btn-primary" ng-click="saveJobBtn(job)">Save Job</button>
                <hr>
           </div>
      </div>
 
-     <div class="container">
-          <div id="map">
-          </div>
-     </div>
+
+  <div class="container">
+    <div id="map">
+    </div>
+  </div>
 </div>

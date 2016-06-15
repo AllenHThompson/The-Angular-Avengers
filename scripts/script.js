@@ -1,8 +1,10 @@
 
 var app = angular.module('app',['ngRoute']);
-//var app = angular.module('app',[]);
 
-//Job Search API service
+var savedJobs = [];
+
+
+/****************** Services ******************/
 app.factory('jobSearchService', function($http){
   return{
     getListOfJobs: function(callback){
@@ -20,17 +22,8 @@ app.factory('jobSearchService', function($http){
       }).success(callback);
     } // end getListOfJobs method
   }; // end return
-});
+}); // end jobSearchService factory
 
-// Google Map API service
-app.factory('googleMap', function($http){
-  var centerLatLng = {lat: 39.099727, lng: -94.578567};
-  mapOptions = {
-    center: centerLatLng,
-    zoom: 4
-  };
-
-});
 
 function filterForGa(locationList){
      if(locationList.CountrySubDivisionCode === 'Georgia'){
@@ -50,7 +43,7 @@ app.controller('MainController', function($scope, jobSearchService, googleMap){
     googleMap.plotData($scope.allResultsList);
   });
 });
-
+/**** Config: Switch between pages ****/
 app.config(function($routeProvider) {
      $routeProvider
      .when('/search/:keyword/:location', {
@@ -68,9 +61,13 @@ app.config(function($routeProvider) {
 
 });
 
+
 app.controller('SaveJobs', function($scope, $http){
-
-
+  $scope.savedJobs = savedJobs;
+  $scope.deleteJobBtn = function(index){
+    $scope.savedJobs.splice(index,1);
+    console.log($scope.savedJobs);
+  };
 });
 
 app.controller('HomePage', function($scope, $http, $location){
@@ -196,4 +193,11 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
 
      var map = new google.maps.Map(document.getElementById('map'), mapOtions);
 
+
+  $scope.saveJobBtn = function(job){
+    savedJobs.push(job);
+    // $scope.jobcomments = $cookies.get('jobcomments');
+    // $cookies.put('jobcomments', job);
+    console.log(savedJobs);
+  };
 });
