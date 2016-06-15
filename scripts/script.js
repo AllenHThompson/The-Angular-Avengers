@@ -27,63 +27,11 @@ app.factory('googleMap', function($http){
     zoom: 4
   };
 
-  return{
-    plotData: plotData
-  };
-
-  //function to add the markers on the map for the jobs returned by the job search api
-  function plotData(jobs){
-
-    // empty array of infoWindows
-    var infoWindow = [];
-    // var allResultsList = job;
-    // console.log(allResultsList);
-
-
-    var markers = jobs.map(function(job) {
-      var locationList = job.MatchedObjectDescriptor.PositionLocation;
-
-      locationList.map(function(location){
-        var lat = location.Latitude;
-        var lng = location.Longitude;
-        var position = {
-          lat: lat,
-          lng: lng
-        };
-        // console.log(position);
-        var marker = new google.maps.Marker({
-          anchorPoint:new google.maps.Point(0,-8),
-          position: position,
-          map: map,
-        });
-        var contentString = '<a href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>';
-
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-      });
-
-    });
-
-    var mapOtions = {
-      center: centerLatLng,
-      zoom: 10
-    };
-
-    var map = new google.maps.Map(document.getElementById('map'), mapOtions);
-  } // end function plotData
-
-
-
-
-
 });
 
 
-// main controller 
+
+// main controller
 app.controller('MainController', function($scope, jobSearchService, googleMap){
   jobSearchService.getListOfJobs(function(data){
     // returns the first 25 results
@@ -94,3 +42,50 @@ app.controller('MainController', function($scope, jobSearchService, googleMap){
     googleMap.plotData($scope.allResultsList);
   });
 });
+
+
+
+
+//
+// // empty array of infoWindows
+// var infoWindow = [];
+// // var allResultsList = job;
+// // console.log(allResultsList);
+//
+//
+// var markers = jobs.map(function(job) {
+//   var locationList = job.MatchedObjectDescriptor.PositionLocation;
+//
+//   locationList.map(function(location){
+//     var lat = location.Latitude;
+//     var lng = location.Longitude;
+//     var position = {
+//       lat: lat,
+//       lng: lng
+//     };
+//     // console.log(position);
+//     var marker = new google.maps.Marker({
+//       anchorPoint:new google.maps.Point(0,-8),
+//       position: position,
+//       map: map,
+//     });
+//     var contentString = '<a href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>';
+//
+//     var infowindow = new google.maps.InfoWindow({
+//       content: contentString
+//     });
+//     marker.addListener('click', function() {
+//       infowindow.open(map, marker);
+//     });
+//   });
+//
+// });
+//
+// var mapOtions = {
+//   center: centerLatLng,
+//   zoom: 10
+// };
+//
+// var map = new google.maps.Map(document.getElementById('map'), mapOtions);
+// } // end function plotData
+//
