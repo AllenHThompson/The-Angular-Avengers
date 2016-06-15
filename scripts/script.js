@@ -1,66 +1,96 @@
 var app = angular.module('app',[]);
 
-app.controller('JobSearch', function($scope, $http){
+//Job Search API service
+app.factory('jobSearchService', function($http){
+  return{
+    getListOfJobs: function(callback){
+      $http({
+        url: 'https://data.usajobs.gov/api/search',
+        params: {
+          JobCategoryCode: 2210,
+          LocationName: 'Atlanta, Georgia'
+        },
+        headers: {
+          //'User-Agent': 'allenhthompson1@gmail.com',
+          'Authorization-Key': 'MfbLK4LehC6CQvAg3U9nr2Y0nBS5IHnMJjPK+KuoWbM='
+        }
+      }).success(callback);
+    } // end getListOfJobs method
+  }; // end return
+});
 
-  // job search api call
-  $http({
-    url: 'https://data.usajobs.gov/api/search',
-    params: {
-      JobCategoryCode: 2210,
-      // LocationName: 'Atlanta, Georgia'
-    },
-    headers: {
-      //'User-Agent': 'allenhthompson1@gmail.com',
-      'Authorization-Key': 'MfbLK4LehC6CQvAg3U9nr2Y0nBS5IHnMJjPK+KuoWbM='
-    }
-  }).success(function(data) {
-    $scope.resultList = data.SearchResult.SearchResultItems;
-    console.log(data);
-    //debugger
-  });
-
-
-  // google map api call
-  var centerLatLng = {lat: 33.7490, lng: -84.3880};
-
-  var mapOtions = {
+// Google Map API service
+app.factory('googleMap', function($http){
+  var centerLatLng = {lat: 39.099727, lng: -94.578567};
+  mapOptions = {
     center: centerLatLng,
     zoom: 4
   };
 
-  var map = new google.maps.Map(document.getElementById('map'), mapOtions);
+  return{
+    plotData: plotData
+  };
 
-  //plot marker on the map
-  var marker = new google.maps.Marker({
-    var locationList = job.MatchedObjectDescriptor.PositionLocation;
-    locationList.map(function(){
-      var lat = locationList.Longitude;
-      var lng = locationList.Latitude;
+  //function to add the markers on the map for the jobs returned by the job search api
+  function plotData(jobs){
+
+    // empty array of infoWindows
+    var infoWindow = [];
+    // var allResultsList = job;
+    // console.log(allResultsList);
+
+
+    var markers = jobs.map(function(job) {
+      var locationList = job.MatchedObjectDescriptor.PositionLocation;
+
+      locationList.map(function(location){
+        var lat = location.Latitude;
+        var lng = location.Longitude;
+        var position = {
+          lat: lat,
+          lng: lng
+        };
+        // console.log(position);
+        var marker = new google.maps.Marker({
+          anchorPoint:new google.maps.Point(0,-8),
+          position: position,
+          map: map,
+        });
+        var contentString = '<a href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      });
+
     });
 
-  });
+    var mapOtions = {
+      center: centerLatLng,
+      zoom: 10
+    };
+
+    var map = new google.maps.Map(document.getElementById('map'), mapOtions);
+  } // end function plotData
+
+
+
+
+
 });
 
 
+// main controller 
+app.controller('MainController', function($scope, jobSearchService, googleMap){
+  jobSearchService.getListOfJobs(function(data){
+    // returns the first 25 results
+    $scope.allResultsList = data.SearchResult.SearchResultItems;
+    console.log($scope.allResultsList);
 
-
-
-
-
-
-
-
-
-  // $http.jsonp('https://jobs.github.com/positions.json?callback=JSON_CALLBACK',{
-  //   params:{
-  //     full_time: 'true',
-  //     title: 'web devolper',
-  //     // page: page,
-  //     location: 'sf, ca'
-  //   }
-  // }).success(function(data){
-  //
-  //   $scope.data = data;
-  //   //$scope.result = data.list;
-  //   console.log(data);
-  // });
+    // call to the google service plot jobs location on map
+    googleMap.plotData($scope.allResultsList);
+  });
+});

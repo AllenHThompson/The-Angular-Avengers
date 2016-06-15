@@ -9,12 +9,18 @@
     <script src="scripts/angular.js"></script>
     <script src="scripts/script.js"></script>
   </head>
-  <body ng-app="app" ng-controller="JobSearch">
+  <body ng-app="app" ng-controller="MainController">
+    <ul class="nav nav-tabs" id="tabs">
+      <li role="presentation" class="active"><a href="#">Results</a></li>
+      <li role="presentation"><a href="#">Saved Jobs</a></li>
+    </ul>
+
+
+
     <div id="results">
-      <div ng-repeat="job in resultList">
+      <div ng-repeat="job in allResultsList">
         <p>Job Title: {{job.MatchedObjectDescriptor.PositionTitle}}</p>
-        <p >Location: {{job.MatchedObjectDescriptor.PositionLocation[0].Latitude}}, {{job.MatchedObjectDescriptor.PositionLocation[0].Longitude}}</p>
-        <p >Location: {{job.MatchedObjectDescriptor.PositionLocation[0].CityName}}</p>
+        <p>Location: {{job.MatchedObjectDescriptor.PositionLocation[0].CityName}}</p>
         <hr>
       </div>
     </div>
