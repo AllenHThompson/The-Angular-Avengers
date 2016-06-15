@@ -1,11 +1,12 @@
 <div ng-controller="JobSearch">
      <div id="results">
           <nav style="margin-bottom: 20px;">
-               <a href="#/savedJobs">CLICK TO TAKE TO NEXT PAGE</a>
+
+               <a href="#/savedJobs" class="btn btn-primary">My Saved Jobs</a>
           </nav>
-          <div ng-repeat="job in georgiaResultsList" ng-click="openInfoWindow(job)">
+          <div ng-repeat="job in allResultsList" ng-click="openInfoWindow(job)">
                <p>Company Name: {{job.MatchedObjectDescriptor.OrganizationName}}</p>
-               <p >City: {{getGeorgiaLocation(job).CityName}}</p>
+               <p >City: {{job.MatchedObjectDescriptor.PositionLocation[0].CityName}}</p>
 
                <!-- <p >Location: {{job.MatchedObjectDescriptor.PositionLocation[0].Latitude}}, {{job.MatchedObjectDescriptor.PositionLocation[0].Longitude}}</p> -->
                <hr>

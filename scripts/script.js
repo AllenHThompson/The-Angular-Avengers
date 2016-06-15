@@ -1,5 +1,6 @@
 
-var app = angular.module('app',[]);
+var app = angular.module('app',['ngRoute']);
+//var app = angular.module('app',[]);
 
 //Job Search API service
 app.factory('jobSearchService', function($http){
@@ -8,6 +9,7 @@ app.factory('jobSearchService', function($http){
       $http({
         url: 'https://data.usajobs.gov/api/search',
         params: {
+          //Keyword: "developer",
           JobCategoryCode: 2210,
           LocationName: 'Atlanta, Georgia'
         },
@@ -30,8 +32,6 @@ app.factory('googleMap', function($http){
 
 });
 
-var app = angular.module('app',['ngRoute']);
-
 function filterForGa(locationList){
      if(locationList.CountrySubDivisionCode === 'Georgia'){
           return true;
@@ -53,22 +53,36 @@ app.controller('MainController', function($scope, jobSearchService, googleMap){
 
 app.config(function($routeProvider) {
      $routeProvider
-     .when('/', {
+     .when('/search/:keyword/:location', {
           controller: 'JobSearch',
           templateUrl: 'main.html'
      })
      .when('/savedJobs', {
           controller: 'SaveJobs',
           templateUrl: 'savedJobs.html'
+     })
+     .when('/', {
+          controller: 'HomePage',
+          templateUrl: 'home.html'
      });
+
 });
 
 app.controller('SaveJobs', function($scope, $http){
 
-     $scope.message = 'Test message.';
+
 });
 
-app.controller('JobSearch', function($scope, $http){
+app.controller('HomePage', function($scope, $http, $location){
+
+     $scope.searchJobs = function() {
+          $location.path('/search/' + $scope.keyword + '/' + $scope.location);
+     };
+
+
+});
+
+app.controller('JobSearch', function($scope, $http, $routeParams){
 
      // $scope.message = 'Test message.';//this line just checking connectivity
 
@@ -84,8 +98,9 @@ app.controller('JobSearch', function($scope, $http){
      $http({
           url: 'https://data.usajobs.gov/api/search',
           params: {
-               JobCategoryCode: 2210,
-               LocationName: 'Atlanta, Georgia'
+               Keyword: $routeParams.keyword,
+               //JobCategoryCode: 2210,
+               LocationName: $routeParams.location
           },
           headers: {
                //'User-Agent': 'allenhthompson1@gmail.com',
@@ -93,6 +108,7 @@ app.controller('JobSearch', function($scope, $http){
           }
      }).success(function(data) {
           var allResultsList = data.SearchResult.SearchResultItems;
+          console.log('data', allResultsList);
 
           var filterGeorgiaResults = function(oneResult) {
                var cityList = oneResult.MatchedObjectDescriptor.PositionLocation;
@@ -113,19 +129,23 @@ app.controller('JobSearch', function($scope, $http){
           function clearMarker() {
                setMapOnAll(null);
           }
-          $scope.georgiaResultsList = allResultsList.filter(filterGeorgiaResults);
+
+          $scope.allResultsList = allResultsList;
+
+
+          //$scope.georgiaResultsList = allResultsList.filter(filterGeorgiaResults);
           // $scope.resultList = data.SearchResult.SearchResultItems;
           //console.log(JSON.stringify($scope.georgiaResultsList));
 
-          var markers = $scope.georgiaResultsList.map(function(job) {
+          var markers = $scope.allResultsList.map(function(job) {
 
                var locationList = job.MatchedObjectDescriptor.PositionLocation;
 
                //funtiont to fliter the list of jobs to only Georgia
 
-               var locationsInGeorgia = locationList.filter(filterForGa);
+               //var locationsInGeorgia = locationList.filter(filterForGa);
 
-               locationsInGeorgia.map(function(location){
+               locationList.map(function(location){
                     var lat = location.Latitude;
                     var lng = location.Longitude;
                     var position = {
@@ -165,13 +185,13 @@ app.controller('JobSearch', function($scope, $http){
 
      // google map api call
      var centerLatLng = {
-          lat: 33.7490,
-          lng: -84.3880
+          lat: 39.8097,
+          lng: -98.5556
      };
 
      var mapOtions = {
           center: centerLatLng,
-          zoom: 8
+          zoom: 4
      };
 
      var map = new google.maps.Map(document.getElementById('map'), mapOtions);
