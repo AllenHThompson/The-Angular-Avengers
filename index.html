@@ -1,35 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <script src="scripts/angular.js"></script>
-    <script src="scripts/script.js"></script>
-  </head>
-  <body ng-app="app" ng-controller="MainController">
-    <ul class="nav nav-tabs" id="tabs">
-      <li role="presentation" class="active"><a href="#">Results</a></li>
-      <li role="presentation"><a href="#">Saved Jobs</a></li>
-    </ul>
-
-
-
-    <div id="results">
-      <div ng-repeat="job in allResultsList">
-        <p>Job Title: {{job.MatchedObjectDescriptor.PositionTitle}}</p>
-        <p>Location: {{job.MatchedObjectDescriptor.PositionLocation[0].CityName}}</p>
-        <hr>
-      </div>
-    </div>
-
-    <div class="container">
-      <div id="map">
-      </div>
-    </div>
-    <!-- Google Maps Script -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgT-Ah_EjmJL-3DXkgAgacEKeNlVYTQ1A"></script>
-  </body>
+     <head>
+          <meta charset="utf-8">
+          <title></title>
+          <link href="css/style.css" rel="stylesheet">
+          <link href="css/bootstrap.css" rel="stylesheet">
+          <script src="scripts/angular.js"></script>
+          <script src="scripts/angular-route.js"></script>
+          <script src="scripts/script.js"></script>
+     </head>
+     <body ng-app="app">
+          <ng-view></ng-view>
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgT-Ah_EjmJL-3DXkgAgacEKeNlVYTQ1A"></script>
+     </body>
 </html>
