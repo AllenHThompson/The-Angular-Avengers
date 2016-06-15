@@ -3,7 +3,7 @@
   margin-top: 3.5%;
   margin-left: 2%;
   height: 100%;
-  width: 25%;
+  width: 30%;
   /*float: left;*/
   position: absolute;
   overflow: auto;
@@ -13,14 +13,18 @@
   white-space: wrap;
 }
 #tabs{
-  width: 25%;
+  width: 30%;
 }
 .container{
   overflow: auto;
 }
 #map{
-  left: 25%;
+  left: 30%;
   height: 100%;
   width: 75%;
   position: absolute;
+}
+.savedJobs{
+  margin-top: 4%;
+  margin-left: 2%;
 }
