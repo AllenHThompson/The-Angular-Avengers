@@ -37,7 +37,7 @@ app.controller('MainController', function($scope, jobSearchService, googleMap){
   jobSearchService.getListOfJobs(function(data){
     // returns the first 25 results
     $scope.allResultsList = data.SearchResult.SearchResultItems;
-    console.log($scope.allResultsList);
+    //console.log($scope.allResultsList);
 
     // call to the google service plot jobs location on map
     googleMap.plotData($scope.allResultsList);
@@ -66,7 +66,7 @@ app.controller('SaveJobs', function($scope, $http){
   $scope.savedJobs = savedJobs;
   $scope.deleteJobBtn = function(index){
     $scope.savedJobs.splice(index,1);
-    console.log($scope.savedJobs);
+    //console.log($scope.savedJobs);
   };
 });
 
@@ -107,7 +107,7 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
           }
      }).success(function(data) {
           var allResultsList = data.SearchResult.SearchResultItems;
-          console.log('data', allResultsList);
+          //console.log('data', allResultsList);
 
           var filterGeorgiaResults = function(oneResult) {
                var cityList = oneResult.MatchedObjectDescriptor.PositionLocation;
@@ -187,10 +187,16 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
            lat = 39.952584;
            lng = -75.165222;
      } else if (location === "Chicago") {
-           lat = 41.878114;
-           lng = -87.629798;
-     }
 
+          lat = 41.878114;
+          lng = -87.629798;
+     } else if(location === "Miami") {
+          lat = 25.78;
+          lng = -80.22;
+     } else if (location === "Washington") {
+          lat = 38.89
+          lng = -77.03;
+     }
      // google map api call
      var centerLatLng = {
           lat: lat,
@@ -199,7 +205,7 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
 
      var mapOtions = {
           center: centerLatLng,
-          zoom: 8
+          zoom: 9
      };
 
      var map = new google.maps.Map(document.getElementById('map'), mapOtions);
@@ -209,6 +215,6 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
     savedJobs.push(job);
     // $scope.jobcomments = $cookies.get('jobcomments');
     // $cookies.put('jobcomments', job);
-    console.log(savedJobs);
+    //console.log(savedJobs);
   };
 });
