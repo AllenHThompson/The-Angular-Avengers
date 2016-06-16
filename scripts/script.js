@@ -233,7 +233,10 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
 
 
   $scope.saveJobBtn = function(job){
-    savedJobs.push(job);
+    if (savedJobs.indexOf(job) === -1) {
+      savedJobs.push(job);
+    }
+
     // $scope.jobcomments = $cookies.get('jobcomments');
     // $cookies.put('jobcomments', job);
     //console.log(savedJobs);
