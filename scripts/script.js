@@ -181,14 +181,34 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
      });
 
      // google map api call
+
+     //DELETE BELOW CODE TO TEST DRILLING DOWN TO LOCATION
+
+     var location = $routeParams.location;
+     var lat = 0;
+     var lng = 0;
+     if (location === "Atlanta") {
+          lat = 33.748995;
+          lng = -84.387982;
+     } else if(location === "Philidelphia") {
+          lat = 39.952584;
+          lng = -75.165222;
+     } else if (location === "Chicago") {
+          lat = 41.878114;
+          lng = -87.629798;
+     }
+
+
+     //DELETE BELOW CODE TO TEST DRILLING DOWN TO LOCATION
+
      var centerLatLng = {
-          lat: 39.8097,
-          lng: -98.5556
+          lat: lat,
+          lng: lng
      };
 
      var mapOtions = {
           center: centerLatLng,
-          zoom: 4
+          zoom: 8
      };
 
      var map = new google.maps.Map(document.getElementById('map'), mapOtions);
