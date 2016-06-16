@@ -4,12 +4,15 @@
        <li role="presentation"><a href="#/savedJobs">Saved Jobs</a></li>
      </ul>
      <div id="results">
-          <div ng-repeat="job in allResultsList" ng-click="openInfoWindow(job)">
+          <div ng-repeat="job in allResultsList">
                <p>Company Name: {{job.MatchedObjectDescriptor.OrganizationName}}</p>
                <p>Department: {{job.MatchedObjectDescriptor.DepartmentName}}</p>
                <p>Type: {{job.MatchedObjectDescriptor.PositionOfferingType[0].Name}}</p>
                <p>Salary: ${{job.MatchedObjectDescriptor.PositionRemuneration[0].MinimumRange}} - ${{job.MatchedObjectDescriptor.PositionRemuneration[0].MaximumRange}} </p>
-               <p >City: {{job.MatchedObjectDescriptor.PositionLocation[0].CityName}}</p>
+               <ul>
+                    <li ng-repeat="loc in job.MatchedObjectDescriptor.PositionLocation">
+                    {{loc.LocationName}}</li>
+               </ul>
                <button class="btn btn-primary" ng-click="saveJobBtn(job)">Save Job</button>
                <hr>
           </div>

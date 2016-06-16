@@ -40,12 +40,7 @@ app.factory('weatherService', function($http){
   }; // end return
 }); // end app.factory(weatherService)
 
-function filterForGa(locationList){
-     if(locationList.CountrySubDivisionCode === 'Georgia'){
-          return true;
-     } else
-     return false;
-}
+
 
 // main controller
 app.controller('MainController', function($scope, jobSearchService, googleMap){
@@ -105,11 +100,24 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
 
      // $scope.message = 'Test message.';//this line just checking connectivity
 
-     $scope.getGeorgiaLocation = function(job){
+     $scope.getLocation = function(job){
           var cityList = job.MatchedObjectDescriptor.PositionLocation;
-          var gaLocations = cityList.filter(filterForGa);
-          return gaLocations[0];
+          console.log(cityList);
+          var locations = cityList.filter(filterLocations);
+          console.log(locations);
+          return locations[0];
      };
+
+     function filterLocations(location){
+          if(location.LocationName.indexOf($routeParams.location) > -1){
+               return true;
+          } else if (location.LocationName.indexOf("Nationwide")){
+               return true;
+          } else if (location.LocationName.indexOf("Negotiable")){
+               return true;
+          }     
+          return false;
+     }
      $scope.openInfoWindow = function(job){
           infoWindow.setContent('<a target="_blank" href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>');
           infoWindow.open(map, job.marker);
@@ -128,23 +136,21 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
           }
      }).success(function(data) {
           var allResultsList = data.SearchResult.SearchResultItems;
-          //console.log('data', allResultsList);
+          console.log('data', allResultsList);
 
-          var filterGeorgiaResults = function(oneResult) {
-               var cityList = oneResult.MatchedObjectDescriptor.PositionLocation;
-               var gaLocations = cityList.filter(filterForGa);
-
-
-               if (gaLocations.length > 0) {
-                    return true;
-               } else
-               return false;
-               /*
-               1. store locationList as a variable
-               2. filter locationList to only GA locations, store that in variable
-               3. if GA locations is empty (length of 0), return false, otherwise return true
-               */
-          };
+          // var filterGeorgiaResults = function(oneResult) {
+          //      var cityList = oneResult.MatchedObjectDescriptor.PositionLocation;
+          //      var gaLocations = cityList.filter(filterForGa);
+          //      if (gaLocations.length > 0) {
+          //           return true;
+          //      } else
+          //      return false;
+          //      /*
+          //      1. store locationList as a variable
+          //      2. filter locationList to only GA locations, store that in variable
+          //      3. if GA locations is empty (length of 0), return false, otherwise return true
+          //      */
+          // };
 
           function clearMarker() {
                setMapOnAll(null);
@@ -215,8 +221,40 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
           lat = 25.78;
           lng = -80.22;
      } else if (location === "Washington") {
-          lat = 38.89
+          lat = 38.89;
           lng = -77.03;
+     }else if (location === "Montgomery") {
+          lat = 32.361538;
+          lng = -86.279118;
+     } else if(location === "Juneau") {
+          lat = 58.301935;
+          lng = -134.419740;
+     } else if (location === "Phoenix") {
+          lat = 33.448457;
+          lng = -112.073844;
+     } else if (location === "Little Rock") {
+          lat = 34.736009;
+          lng = -92.331122;
+     } else if (location === "Sacramento") {
+          lat = 38.555605;
+          lng = -121.468926;
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+     else {
+          lat = 1
+          lng = -1;
      }
      // google map api call
      var centerLatLng = {
