@@ -80,6 +80,7 @@ app.controller('HomePage', function($scope, $http, $location){
 });
 
 app.controller('JobSearch', function($scope, $http, $routeParams){
+  var infoWindow = new google.maps.InfoWindow();
 
      // $scope.message = 'Test message.';//this line just checking connectivity
 
@@ -89,7 +90,8 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
           return gaLocations[0];
      };
      $scope.openInfoWindow = function(job){
-          job.infoWindow.open(map, job.marker);
+          infoWindow.setContent('<a target="_blank" href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>');
+          infoWindow.open(map, job.marker);
      };
      // job search api call
      $http({
@@ -156,14 +158,10 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
                          map: map,
                     });
                     job.marker = marker;
-                    var contentString = '<a href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>';
+                    var contentString = '<a href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>';
 
-
-                    var infoWindow = new google.maps.InfoWindow({
-                         content: contentString
-                    });
-                    job.infoWindow = infoWindow;
                     marker.addListener('click', function() {
+                        infoWindow.setContent('<a target="_blank" href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>');
                          infoWindow.open(map, marker);
                     });
                     //REMOVE THE CODE BELOW
@@ -179,28 +177,21 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
           });
           //<a href = "LINK"></a>
      });
-
-     // google map api call
-
-     //DELETE BELOW CODE TO TEST DRILLING DOWN TO LOCATION
-
      var location = $routeParams.location;
      var lat = 0;
      var lng = 0;
      if (location === "Atlanta") {
-          lat = 33.748995;
-          lng = -84.387982;
+           lat = 33.748995;
+           lng = -84.387982;
      } else if(location === "Philidelphia") {
-          lat = 39.952584;
-          lng = -75.165222;
+           lat = 39.952584;
+           lng = -75.165222;
      } else if (location === "Chicago") {
-          lat = 41.878114;
-          lng = -87.629798;
+           lat = 41.878114;
+           lng = -87.629798;
      }
 
-
-     //DELETE BELOW CODE TO TEST DRILLING DOWN TO LOCATION
-
+     // google map api call
      var centerLatLng = {
           lat: lat,
           lng: lng
