@@ -194,7 +194,7 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
           lat = 25.78;
           lng = -80.22;
      } else if (location === "Washington") {
-          lat = 38.89
+          lat = 38.89;
           lng = -77.03;
      }
      // google map api call
