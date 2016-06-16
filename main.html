@@ -9,7 +9,10 @@
                <p>Department: {{job.MatchedObjectDescriptor.DepartmentName}}</p>
                <p>Type: {{job.MatchedObjectDescriptor.PositionOfferingType[0].Name}}</p>
                <p>Salary: ${{job.MatchedObjectDescriptor.PositionRemuneration[0].MinimumRange}} - ${{job.MatchedObjectDescriptor.PositionRemuneration[0].MaximumRange}} </p>
-               <p >City: {{job.MatchedObjectDescriptor.PositionLocation[0].CityName}}</p>
+               <ul>
+                    <li ng-repeat="loc in job.MatchedObjectDescriptor.PositionLocation">
+                    {{loc.LocationName}}</li>
+               </ul>
                <button class="btn btn-primary" ng-click="saveJobBtn(job)">Save Job</button>
                <hr>
           </div>
