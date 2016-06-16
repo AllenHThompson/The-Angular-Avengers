@@ -1,13 +1,3 @@
-
-<!-- <h1>Home Page</h1>
-
-<div class="wrapper">
-
-<input type="text" placeholder="Job Keyword" ng-model="keyword">
-<input type="text" placeholder="City or Zip" ng-model="location">
-<button class="btn btn-primary" ng-click="searchJobs()">GO!</button>
-
-</div> -->
 <div class="body">
   <div class="head">
     <div class="row">
@@ -38,8 +28,21 @@
         </div>
         <div class="col-md-5">
           <div class="wrapper">
-            <input type="text" placeholder="Job Keyword" ng-model="keyword">
-            <input type="text" placeholder="City or Zip" ng-model="location">
+            <select id = "selKeyword" ng-model="keyword">
+                  <option value = "IT">IT</option>
+                  <option value = "Developer">Developer</option>
+                  <option value = "Contractor<">Contractor</option>
+            </select>
+
+
+            <select id = "selCity" ng-model="location">
+                  <option value = "Atlanta">Atlanta</option>
+                  <option value = "Philidelphia">Philidelphia</option>
+                  <option value = "Chicago">Chicago</option>
+                  <option value = "Miami">Miami</option>
+                  <option value = "Washington">Washington</option>
+
+            </select>
             <button class="btn btn-primary" ng-click="searchJobs()">GO!</button>
           </div>
           <div style="margin-top: 10%;">

@@ -52,7 +52,7 @@ app.controller('MainController', function($scope, jobSearchService, googleMap){
   jobSearchService.getListOfJobs(function(data){
     // returns the first 25 results
     $scope.allResultsList = data.SearchResult.SearchResultItems;
-    console.log($scope.allResultsList);
+    //console.log($scope.allResultsList);
 
     // call to the google service plot jobs location on map
     googleMap.plotData($scope.allResultsList);
@@ -81,7 +81,7 @@ app.controller('SaveJobs', function($scope, $http){
   $scope.savedJobs = savedJobs;
   $scope.deleteJobBtn = function(index){
     $scope.savedJobs.splice(index,1);
-    console.log($scope.savedJobs);
+    //console.log($scope.savedJobs);
   };
 });
 
@@ -101,6 +101,7 @@ app.controller('HomePage', function($scope, $http, $location, weatherService){
 });
 
 app.controller('JobSearch', function($scope, $http, $routeParams){
+  var infoWindow = new google.maps.InfoWindow();
 
      // $scope.message = 'Test message.';//this line just checking connectivity
 
@@ -110,7 +111,8 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
           return gaLocations[0];
      };
      $scope.openInfoWindow = function(job){
-          job.infoWindow.open(map, job.marker);
+          infoWindow.setContent('<a target="_blank" href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>');
+          infoWindow.open(map, job.marker);
      };
      // job search api call
      $http({
@@ -126,7 +128,7 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
           }
      }).success(function(data) {
           var allResultsList = data.SearchResult.SearchResultItems;
-          console.log('data', allResultsList);
+          //console.log('data', allResultsList);
 
           var filterGeorgiaResults = function(oneResult) {
                var cityList = oneResult.MatchedObjectDescriptor.PositionLocation;
@@ -177,14 +179,10 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
                          map: map,
                     });
                     job.marker = marker;
-                    var contentString = '<a href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>';
+                    var contentString = '<a href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>';
 
-
-                    var infoWindow = new google.maps.InfoWindow({
-                         content: contentString
-                    });
-                    job.infoWindow = infoWindow;
                     marker.addListener('click', function() {
+                        infoWindow.setContent('<a target="_blank" href =' + job.MatchedObjectDescriptor.PositionURI + '>Apply To This Job</a>' + '<h5>' + job.MatchedObjectDescriptor.PositionTitle + '</h5>');
                          infoWindow.open(map, marker);
                     });
                     //REMOVE THE CODE BELOW
@@ -200,16 +198,35 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
           });
           //<a href = "LINK"></a>
      });
+     var location = $routeParams.location;
+     var lat = 0;
+     var lng = 0;
+     if (location === "Atlanta") {
+           lat = 33.748995;
+           lng = -84.387982;
+     } else if(location === "Philidelphia") {
+           lat = 39.952584;
+           lng = -75.165222;
+     } else if (location === "Chicago") {
 
+          lat = 41.878114;
+          lng = -87.629798;
+     } else if(location === "Miami") {
+          lat = 25.78;
+          lng = -80.22;
+     } else if (location === "Washington") {
+          lat = 38.89
+          lng = -77.03;
+     }
      // google map api call
      var centerLatLng = {
-          lat: 39.8097,
-          lng: -98.5556
+          lat: lat,
+          lng: lng
      };
 
      var mapOtions = {
           center: centerLatLng,
-          zoom: 4
+          zoom: 9
      };
 
      var map = new google.maps.Map(document.getElementById('map'), mapOtions);
@@ -219,6 +236,6 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
     savedJobs.push(job);
     // $scope.jobcomments = $cookies.get('jobcomments');
     // $cookies.put('jobcomments', job);
-    console.log(savedJobs);
+    //console.log(savedJobs);
   };
 });
