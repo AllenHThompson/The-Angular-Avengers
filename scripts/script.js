@@ -24,6 +24,21 @@ app.factory('jobSearchService', function($http){
   }; // end return
 }); // end jobSearchService factory
 
+app.factory('weatherService', function($http){
+  var APPID = '0eec4393061dd3bf6597febdb72c50c4';
+  return {
+    getByCityID: function(callback){
+      $http({
+        url: 'http://api.openweathermap.org/data/2.5/weather',
+        params: {
+          q: 'Atlanta',
+          units: 'imperial',
+          APPID: APPID
+        }
+      }).success(callback);
+    } // end getByCityID method
+  }; // end return
+}); // end app.factory(weatherService)
 
 function filterForGa(locationList){
      if(locationList.CountrySubDivisionCode === 'Georgia'){
@@ -70,11 +85,17 @@ app.controller('SaveJobs', function($scope, $http){
   };
 });
 
-app.controller('HomePage', function($scope, $http, $location){
+app.controller('HomePage', function($scope, $http, $location, weatherService){
+  var d = new Date();
+  document.getElementById("displayDate").innerHTML = d.toDateString();
 
      $scope.searchJobs = function() {
           $location.path('/search/' + $scope.keyword + '/' + $scope.location);
      };
+     weatherService.getByCityID(function(data){
+         $scope.data = data;
+         console.log($scope.data);
+     });
 
 
 });

@@ -27,23 +27,43 @@
 
 
 body{
-     background-image: url("restaurant.png");
-}
-
-h1{
-     text-align: center;
-}
-
-.wrapper {
-    text-align: center;
+  background-image: url("restaurant.png");
 }
 
 /*.button {
-    position: absolute;
-    top: 50%;
+position: absolute;
+top: 50%;
 }*/
 
 .savedJobs{
   margin-top: 4%;
   margin-left: 2%;
+}
+
+.body{
+  font-family: 'Droid Serif', serif;
+  font-size: 14px;
+  color: #2f2f2f;
+  background-color: #f9f7f1;
+}
+.weatherforcastbox{
+  margin-top: 1%;
+  margin-left: 1%;
+}
+.header{
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 40px;
+  text-transform: uppercase;
+  display: inline-block;
+  line-height: 72px;
+  margin-bottom: 7px;
+  margin-left: -270px;
+}
+
+.wrapper{
+  text-align: center;
+}
+.titleAuthor{
+  text-align: center;"
 }
