@@ -196,6 +196,38 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
      } else if (location === "Washington") {
           lat = 38.89
           lng = -77.03;
+     }else if (location === "Montgomery") {
+          lat = 32.361538;
+          lng = -86.279118;
+     } else if(location === "Juneau") {
+          lat = 58.301935;
+          lng = -134.419740;
+     } else if (location === "Phoenix") {
+          lat = 33.448457;
+          lng = -112.073844;
+     } else if (location === "Little Rock") {
+          lat = 34.736009;
+          lng = -92.331122;
+     } else if (location === "Sacramento") {
+          lat = 38.555605;
+          lng = -121.468926;
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+     else {
+          lat = 1
+          lng = -1;
      }
      // google map api call
      var centerLatLng = {
