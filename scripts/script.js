@@ -196,7 +196,12 @@ app.controller('JobSearch', function($scope, $http, $routeParams){
      } else if (location === "Chicago") {
           lat = 41.878114;
           lng = -87.629798;
-     }
+     } else if(location === "Miami") {
+          lat = 25.78;
+          lng = -80.22;
+     } else if (location === "Washington") {
+          lat = 38.89
+          lng = -77.03;
 
 
      //DELETE BELOW CODE TO TEST DRILLING DOWN TO LOCATION
