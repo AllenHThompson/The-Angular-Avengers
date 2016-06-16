@@ -4,7 +4,7 @@
        <li role="presentation"><a href="#/savedJobs">Saved Jobs</a></li>
      </ul>
      <div id="results">
-          <div ng-repeat="job in allResultsList" ng-click="openInfoWindow(job)">
+          <div ng-repeat="job in allResultsList">
                <p>Company Name: {{job.MatchedObjectDescriptor.OrganizationName}}</p>
                <p>Department: {{job.MatchedObjectDescriptor.DepartmentName}}</p>
                <p>Type: {{job.MatchedObjectDescriptor.PositionOfferingType[0].Name}}</p>
