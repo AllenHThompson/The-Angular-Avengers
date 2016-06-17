@@ -15,9 +15,14 @@ jobPress is a public job searching site. It blends the ability to save what you 
 * We mostly used MOB Programming to create this site.
   * Allen Thompson HTML5, Javascript, AJAX, Bootstrap
   * Andrew Katz - ReadME File, Angular, HTML, Bootstrap
-  * Shanda Kennedy - HTML5, CSS & Routing, Bootstrap 
+  * Shanda Kennedy - HTML5, CSS & Routing, Bootstrap
 
 ## Screenshots!
+[logo]: https://raw.githubusercontent.com/DigitalCrafts-May-2016-Cohort/The-Angular-Avengers/master/homepage.png "Home Page Example"
+[logo]: https://raw.githubusercontent.com/DigitalCrafts-May-2016-Cohort/The-Angular-Avengers/master/savebutton.png "Save Button Example"
+https://raw.githubusercontent.com/DigitalCrafts-May-2016-Cohort/The-Angular-Avengers/master/googlemaps.png "Google Maps Example"
+
+
 
 ##Contributions We Would Like From You!
 * Create the ability to remove a job from Google Maps.
