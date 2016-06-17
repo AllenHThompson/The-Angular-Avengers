@@ -26,7 +26,7 @@ jobPress is a public job searching site. It blends the ability to save what you 
 
 ##Contributions We Would Like From You!
 * Create the ability to remove a job from Google Maps.
-* Be able to permanently save your jobs on the Saved Jobs tab by added a larger backend.
+* Be able to permanently save your jobs on the Saved Jobs tab by adding a larger backend.
 * Show more jobs in different fields of work using more APIs.
 
 ## URL For Live Site
