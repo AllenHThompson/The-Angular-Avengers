@@ -4,12 +4,12 @@
 jobPress is a public job searching site. It blends the ability to save what you applied for and the accessibility of seeing all the jobs on Google Maps. The idea for this site came from how difficult it can be to keep track of the jobs you apply for. This site gives you the ability too not only find the jobs your looking for easily, but save the ones you want to keep track of.
 
 #Languages, Frameworks & Tech That Was Used
-* HTML5
-* AJAX
-* Angular
-* CSS3
-* Javascript
-* Bootstrap 3
+* [HTML5] (https://en.wikipedia.org/wiki/HTML5)
+* [AJAX] (https://en.wikipedia.org/wiki/Ajax_programming)
+* [Angular] (https://en.wikipedia.org/wiki/Angular)
+* [CSS3] (https://en.wikipedia.org/wiki/Cascading_Style_Sheets#CSS_3)
+* [Javascript] (https://en.wikipedia.org/wiki/JavaScript)
+* [Bootstrap 3] (https://en.wikipedia.org/wiki/Bootstrap_front-end_framework)
 
 ##The People Involved
 * We mostly used MOB Programming to create this site.
@@ -26,7 +26,7 @@ jobPress is a public job searching site. It blends the ability to save what you 
 
 ##Contributions We Would Like From You!
 * Create the ability to remove a job from Google Maps.
-* Be able to permanently save your jobs on the Saved Jobs tab.
+* Be able to permanently save your jobs on the Saved Jobs tab by added a larger backend.
 * Show more jobs in different fields of work using more APIs.
 
 ## URL For Live Site
