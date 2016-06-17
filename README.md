@@ -31,4 +31,4 @@ jobPress is a public job searching site. It blends the ability to save what you 
 
 ## URL For Live Site
 
-[Live Site](jobpress.surge.sh)
+[Live Site](http://jobpress.surge.sh)
