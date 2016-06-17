@@ -13,7 +13,7 @@ jobPress is a public job searching site. It blends the ability to save what you 
 
 ##The People Involved
 * We mostly used MOB Programming to create this site.
-  * Allen Thompson HTML5, Javascript, AJAX, Bootstrap
+  * Allen Thompson - HTML5, Javascript, AJAX, Bootstrap
   * Andrew Katz - ReadME File, Angular, HTML, Bootstrap
   * Shanda Kennedy - HTML5, CSS & Routing, Bootstrap
 
