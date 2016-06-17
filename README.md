@@ -13,9 +13,9 @@ jobPress is a public job searching site. It blends the ability to save what you 
 
 ##The People Involved
 * We mostly used MOB Programming to create this site.
-  * Allen Thompson - HTML5, Javascript, AJAX, Bootstrap
-  * Andrew Katz - ReadME File, Angular, HTML, Bootstrap
-  * Shanda Kennedy - HTML5, CSS & Routing, Bootstrap
+  * [Allen Thompson] (https://github.com/AllenHThompson) - HTML5, Javascript, AJAX, Bootstrap
+  * [Andrew Katz] (https://github.com/TheBigKatz) - ReadME File, Angular, HTML, Bootstrap
+  * [Shanda Kennedy] (https://github.com/ShandaQ) - HTML5, CSS & Routing, Bootstrap
 
 ## Screenshots!
 ![alt text](https://raw.githubusercontent.com/DigitalCrafts-May-2016-Cohort/The-Angular-Avengers/master/homepage.png "Home Page Example")
