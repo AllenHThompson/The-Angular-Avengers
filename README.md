@@ -18,9 +18,9 @@ jobPress is a public job searching site. It blends the ability to save what you 
   * Shanda Kennedy - HTML5, CSS & Routing, Bootstrap
 
 ## Screenshots!
-[logo]: https://raw.githubusercontent.com/DigitalCrafts-May-2016-Cohort/The-Angular-Avengers/master/homepage.png "Home Page Example"
-[logo]: https://raw.githubusercontent.com/DigitalCrafts-May-2016-Cohort/The-Angular-Avengers/master/savebutton.png "Save Button Example"
-[logo]: https://raw.githubusercontent.com/DigitalCrafts-May-2016-Cohort/The-Angular-Avengers/master/googlemaps.png "Google Maps Example"
+![screenshot]: (https://raw.githubusercontent.com/DigitalCrafts-May-2016-Cohort/The-Angular-Avengers/master/homepage.png) "Home Page Example"
+![screenshot]: (https://raw.githubusercontent.com/DigitalCrafts-May-2016-Cohort/The-Angular-Avengers/master/savebutton.png) "Save Button Example"
+![screenshot]: (https://raw.githubusercontent.com/DigitalCrafts-May-2016-Cohort/The-Angular-Avengers/master/googlemaps.png) "Google Maps Example"
 
 
 
