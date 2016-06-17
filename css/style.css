@@ -29,7 +29,8 @@
 
 
 body{
-  background-image: url("restaurant.png");
+  /*background-image: url("restaurant.png");*/
+  background-color: #f9f7f1;
 }
 
 /*.button {
@@ -42,7 +43,7 @@ top: 50%;
   margin-left: 2%;
 }
 
-.body{
+.homepage{
   font-family: 'Droid Serif', serif;
   font-size: 14px;
   color: #2f2f2f;
@@ -68,4 +69,35 @@ top: 50%;
 }
 .titleAuthor{
   text-align: center;"
+}
+.panel-heading {
+    text-align: center;
+}
+.panel > .panel-heading {
+    background-color: black;
+    color: white;
+    font-size: 3em;
+
+}
+.panel > .panel-body{
+   background-color: #f9f7f1;
+   text-align: center;
+}
+
+#results{
+  margin-top: 41px;
+    margin-left: -2px;
+}
+.companyInfo{
+  margin-left: -239;
+}
+li{
+  list-style: none;
+  text-align: center;
+}
+#saveBtn{
+  margin-left: 10%;
+}
+.companyInfo{
+  text-align: center;
 }
