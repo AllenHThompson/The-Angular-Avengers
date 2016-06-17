@@ -68,3 +68,34 @@ top: 50%;
 .titleAuthor{
   text-align: center;"
 }
+.panel-heading {
+    text-align: center;
+}
+.panel > .panel-heading {
+    background-color: black;
+    color: white;
+    font-size: 3em;
+
+}
+.panel > .panel-body{
+   background-color: #f9f7f1;
+   text-align: center;
+}
+
+#results{
+  margin-top: 41px;
+    margin-left: -2px;
+}
+.companyInfo{
+  margin-left: -239;
+}
+li{
+  list-style: none;
+  text-align: center;
+}
+#saveBtn{
+  margin-left: 10%;
+}
+.companyInfo{
+  text-align: center;
+}
