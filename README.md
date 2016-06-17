@@ -14,7 +14,7 @@ jobPress is a public job searching site. It blends the ability to save what you 
 ##The People Involved
 * We mostly used MOB Programming to create this site.
   * [Allen Thompson] (https://github.com/AllenHThompson) - HTML5, Javascript, AJAX, Bootstrap
-  * [Andrew Katz] (https://github.com/TheBigKatz) - ReadME File, Angular, HTML, Bootstrap
+  * [Andrew Katz] (https://github.com/TheBigKatz) - ReadME File, Angular, HTML5, Bootstrap
   * [Shanda Kennedy] (https://github.com/ShandaQ) - HTML5, CSS & Routing, Bootstrap
 
 ## Screenshots!
@@ -31,4 +31,4 @@ jobPress is a public job searching site. It blends the ability to save what you 
 
 ## URL For Live Site
 
-[Live Site]()
+[Live Site](jobpress.surge.sh)
